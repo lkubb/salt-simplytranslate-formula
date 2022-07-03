@@ -1,0 +1,9 @@
+version: "3.6"
+
+services:
+  simplytranslate:
+    build: {{ salt["file.dirname"](translate.lookup.paths.build) }}
+    ports:
+      - "{{ translate.config.network.port }}:{{ translate.config.network.port }}"
+    volumes:
+      - "{{ translate.lookup.paths.base | path_join("config.conf") }}:/etc/simplytranslate/web.conf"

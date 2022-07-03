@@ -1,0 +1,89 @@
+# -*- coding: utf-8 -*-
+# vim: ft=yaml
+# yamllint disable rule:comments-indentation
+---
+translate:
+  install:
+      # Install rootless containers running as dedicated user.
+    rootless: true
+      # When applying `clean` states, also remove application data.
+      # Setting this to true might incur accidental data loss!
+    remove_all_data_for_sure: false
+  config:
+      # Deepl Translate does not support async as of right now, it will block all
+      # other requests.
+    deepl:
+      Enabled: false
+    google:
+      Enabled: true
+      # ICIBA Translate (a.k.a. PowerWord)
+    iciba:
+      Enabled: false
+      # LibreTranslate is disabled by default. If it is enabled, `Instance` is required.
+    libre:
+        # Not all instances need an API key. Leave this unspecified in that case.
+      ApiKey: null
+      Enabled: false
+      Instance: https://libretranslate.com
+    network:
+      host: 0.0.0.0
+      port: 5180
+
+  lookup:
+    rootgroup: root
+    compose:
+      create_pod: null
+      pod_args: null
+      project_name: simplytranslate
+      remove_orphans: true
+      service:
+        container_prefix: null
+        ephemeral: true
+        pod_prefix: null
+        restart_policy: on-failure
+        separator: null
+        stop_timeout: null
+    paths:
+      base: /opt/containers/simplytranslate
+      compose: docker-compose.yml
+      config_simplytranslate: simplytranslate.env
+      build: Dockerfile
+      config: config.conf
+    user:
+      groups: []
+      home: null
+      name: simplytranslate
+      shell: /usr/sbin/nologin
+      uid: null
+
+  tofs:
+      # The files_switch key serves as a selector for alternative
+      # directories under the formula files directory. See TOFS pattern
+      # doc for more info.
+      # Note: Any value not evaluated by `config.get` will be used literally.
+      # This can be used to set custom paths, as many levels deep as required.
+    files_switch:
+      - any/path/can/be/used/here
+      - id
+      - roles
+      - osfinger
+      - os
+      - os_family
+
+      # All aspects of path/file resolution are customisable using the options below.
+      # This is unnecessary in most cases; there are sensible defaults.
+      # Default path: salt://< path_prefix >/< dirs.files >/< dirs.default >
+      # I.e.: salt://translate/files/default
+      # path_prefix: template_alt
+      # dirs:
+      #   files: files_alt
+      #   default: default_alt
+      # The entries under `source_files` are prepended to the default source files
+      # given for the state
+    source_files:
+      SimplyTranslate compose file is managed:
+        - docker-compose_alt.yml
+        - docker-compose_alt.yml.j2
+      simplytranslate environment file is managed:
+        - simplytranslate_alt.env
+        - simplytranslate_alt.env.j2

@@ -1,0 +1,56 @@
+{
+  "template": "https://github.com/lkubb/salt-template-formula-compose",
+  "commit": "7c15b4ed8e4a1a140324cff2bb17b0fa743494bc",
+  "checkout": null,
+  "context": {
+    "cookiecutter": {
+      "_extensions": [
+        "local_extensions.YAMLDumper"
+      ],
+      "_jinja2_env_vars": {
+        "block_start_string": "{!",
+        "block_end_string": "!}",
+        "variable_start_string": "{=",
+        "variable_end_string": "=}",
+        "comment_start_string": "{@",
+        "comment_end_string": "@}"
+      },
+      "name": "SimplyTranslate",
+      "abbr": "translate",
+      "abbr_pysafe": "translate",
+      "project_name": "simplytranslate",
+      "containers": "simplytranslate",
+      "git_username": "lkubb",
+      "_lookup": {
+        "paths": {
+          "config": "config.conf",
+          "build": "Dockerfile"
+        }
+      },
+      "_settings": {
+        "config": {
+          "deepl": {
+            "Enabled": false
+          },
+          "google": {
+            "Enabled": true
+          },
+          "iciba": {
+            "Enabled": false
+          },
+          "libre": {
+            "Enabled": false,
+            "Instance": "https://libretranslate.com",
+            "ApiKey": null
+          },
+          "network": {
+            "port": 5180,
+            "host": "0.0.0.0"
+          }
+        }
+      },
+      "_template": "https://github.com/lkubb/salt-template-formula-compose"
+    }
+  },
+  "directory": null
+}

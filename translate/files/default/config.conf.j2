@@ -1,0 +1,6 @@
+{%- for category, configs in translate.config | dictsort %}
+[{{ category }}]
+{%-   for k, v in configs | dictsort %}
+{{ k }} = {{ v }}
+{%-   endfor %}
+{% endfor %}

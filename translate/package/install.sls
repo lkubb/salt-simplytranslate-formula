@@ -22,6 +22,8 @@ SimplyTranslate user session is initialized at boot:
   compose.lingering_managed:
     - name: {{ translate.lookup.user.name }}
     - enable: {{ translate.install.rootless }}
+    - require:
+      - user: {{ translate.lookup.user.name }}
 
 SimplyTranslate paths are present:
   file.directory:

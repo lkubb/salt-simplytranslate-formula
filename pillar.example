@@ -41,6 +41,7 @@ translate:
         ephemeral: true
         pod_prefix: null
         restart_policy: on-failure
+        restart_sec: 2
         separator: null
         stop_timeout: null
     paths:
@@ -55,6 +56,7 @@ translate:
       name: simplytranslate
       shell: /usr/sbin/nologin
       uid: null
+      gid: null
 
   tofs:
       # The files_switch key serves as a selector for alternative

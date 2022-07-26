@@ -17,6 +17,7 @@ translate:
         ephemeral: true
         pod_prefix: null
         restart_policy: on-failure
+        restart_sec: 2
         separator: null
         stop_timeout: null
     paths:
@@ -31,6 +32,7 @@ translate:
       name: simplytranslate
       shell: /usr/sbin/nologin
       uid: null
+      gid: null
   install:
     rootless: true
     remove_all_data_for_sure: false

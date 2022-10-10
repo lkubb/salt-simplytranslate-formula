@@ -8,6 +8,18 @@
 include:
   - {{ sls_config_clean }}
 
+{%- if translate.install.autoupdate_service %}
+
+Podman autoupdate service is disabled for SimplyTranslate:
+{%-   if translate.install.rootless %}
+  compose.systemd_service_disabled:
+    - user: {{ translate.lookup.user.name }}
+{%-   else %}
+  service.disabled:
+{%-   endif %}
+    - name: podman-auto-update.timer
+{%- endif %}
+
 SimplyTranslate is absent:
   compose.removed:
     - name: {{ translate.lookup.paths.compose }}

@@ -80,3 +80,15 @@ SimplyTranslate is installed:
     - require:
       - user: {{ translate.lookup.user.name }}
 {%- endif %}
+
+{%- if translate.install.autoupdate_service is not none %}
+
+Podman autoupdate service is managed for SimplyTranslate:
+{%-   if translate.install.rootless %}
+  compose.systemd_service_{{ "enabled" if translate.install.autoupdate_service else "disabled" }}:
+    - user: {{ translate.lookup.user.name }}
+{%-   else %}
+  service.{{ "enabled" if translate.install.autoupdate_service else "disabled" }}:
+{%-   endif %}
+    - name: podman-auto-update.timer
+{%- endif %}

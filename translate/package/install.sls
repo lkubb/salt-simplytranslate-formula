@@ -1,7 +1,6 @@
-# -*- coding: utf-8 -*-
 # vim: ft=sls
 
-{%- set tplroot = tpldir.split('/')[0] %}
+{%- set tplroot = tpldir.split("/")[0] %}
 {%- from tplroot ~ "/map.jinja" import mapdata as translate with context %}
 {%- from tplroot ~ "/libtofs.jinja" import files_switch with context %}
 
@@ -35,18 +34,35 @@ SimplyTranslate paths are present:
     - require:
       - user: {{ translate.lookup.user.name }}
 
+{%- if translate.install.podman_api %}
+
+SimplyTranslate podman API is enabled:
+  compose.systemd_service_enabled:
+    - name: podman
+    - user: {{ translate.lookup.user.name }}
+    - require:
+      - SimplyTranslate user session is initialized at boot
+
+SimplyTranslate podman API is available:
+  compose.systemd_service_running:
+    - name: podman
+    - user: {{ translate.lookup.user.name }}
+    - require:
+      - SimplyTranslate user session is initialized at boot
+{%- endif %}
+
 SimplyTranslate build/compose files are managed:
   file.managed:
     - names:
       - {{ translate.lookup.paths.build }}:
-        - source: {{ files_switch(['Dockerfile', 'Dockerfile.j2'],
-                                  lookup='SimplyTranslate build file is present',
+        - source: {{ files_switch(["Dockerfile", "Dockerfile.j2"],
+                                  lookup="SimplyTranslate build file is present",
                                   indent_width=10,
                      )
                   }}
       - {{ translate.lookup.paths.compose }}:
-        - source: {{ files_switch(['docker-compose.yml', 'docker-compose.yml.j2'],
-                                  lookup='SimplyTranslate compose file is present',
+        - source: {{ files_switch(["docker-compose.yml", "docker-compose.yml.j2"],
+                                  lookup="SimplyTranslate compose file is present",
                                   indent_width=10,
                      )
                   }}

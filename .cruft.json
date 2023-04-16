@@ -1,6 +1,6 @@
 {
   "template": "https://github.com/lkubb/salt-template-formula-compose",
-  "commit": "249eb39f6241fe5718691b21f7e7d82b962c8aa3",
+  "commit": "796b2c50d2796055ff7b66d17bca6f9ded64f40e",
   "checkout": null,
   "context": {
     "cookiecutter": {
@@ -21,13 +21,13 @@
       "project_name": "simplytranslate",
       "containers": "simplytranslate",
       "git_username": "lkubb",
-      "_lookup": {
+      "lookup": {
         "paths": {
           "config": "config.conf",
           "build": "Dockerfile"
         }
       },
-      "_settings": {
+      "settings": {
         "config": {
           "deepl": {
             "Enabled": false

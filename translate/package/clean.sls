@@ -51,7 +51,7 @@ SimplyTranslate compose file is absent:
 
 SimplyTranslate podman API is unavailable:
   compose.systemd_service_dead:
-    - name: podman
+    - name: podman.socket
     - user: {{ translate.lookup.user.name }}
     - onlyif:
       - fun: user.info
@@ -59,7 +59,7 @@ SimplyTranslate podman API is unavailable:
 
 SimplyTranslate podman API is disabled:
   compose.systemd_service_disabled:
-    - name: podman
+    - name: podman.socket
     - user: {{ translate.lookup.user.name }}
     - onlyif:
       - fun: user.info

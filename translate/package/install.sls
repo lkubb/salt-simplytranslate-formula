@@ -2,7 +2,7 @@
 
 {%- set tplroot = tpldir.split("/")[0] %}
 {%- from tplroot ~ "/map.jinja" import mapdata as translate with context %}
-{%- from tplroot ~ "/libtofs.jinja" import files_switch with context %}
+{%- from tplroot ~ "/libtofsstack.jinja" import files_switch with context %}
 
 SimplyTranslate user account is present:
   user.present:
@@ -55,21 +55,25 @@ SimplyTranslate build/compose files are managed:
   file.managed:
     - names:
       - {{ translate.lookup.paths.build }}:
-        - source: {{ files_switch(["Dockerfile", "Dockerfile.j2"],
-                                  lookup="SimplyTranslate build file is present",
-                                  indent_width=10,
+        - source: {{ files_switch(
+                        ["Dockerfile", "Dockerfile.j2"],
+                        config=translate,
+                        lookup="SimplyTranslate build file is present",
+                        indent_width=10,
                      )
                   }}
       - {{ translate.lookup.paths.compose }}:
-        - source: {{ files_switch(["docker-compose.yml", "docker-compose.yml.j2"],
-                                  lookup="SimplyTranslate compose file is present",
-                                  indent_width=10,
+        - source: {{ files_switch(
+                        ["docker-compose.yml", "docker-compose.yml.j2"],
+                        config=translate,
+                        lookup="SimplyTranslate compose file is present",
+                        indent_width=10,
                      )
                   }}
     - mode: '0644'
     - user: root
     - group: {{ translate.lookup.rootgroup }}
-    - makedirs: True
+    - makedirs: true
     - template: jinja
     - makedirs: true
     - context:

@@ -34,4 +34,4 @@ SimplyTranslate service is running:
 {%- endif %}
     - watch:
       - SimplyTranslate is installed
-      - file: {{ translate.lookup.paths.config }}
+      - sls: {{ sls_config_file }}

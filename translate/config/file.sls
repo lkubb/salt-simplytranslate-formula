@@ -24,7 +24,7 @@ SimplyTranslate config file is managed:
     - template: jinja
     - require:
       - user: {{ translate.lookup.user.name }}
-    - watch_in:
+    - require_in:
       - SimplyTranslate is installed
     - context:
         translate: {{ translate | json }}
